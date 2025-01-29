@@ -1,9 +1,9 @@
-import ReviewCard from "./components/ReviewCard/ReviewCard";
+import ReviewList from "./components/ReviewList/ReviewList";
 
 function App() {
 	return (
 		<>
-			<ReviewCard />
+			<ReviewList />
 		</>
 	);
 }
