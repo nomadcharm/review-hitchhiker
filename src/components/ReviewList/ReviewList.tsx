@@ -21,9 +21,9 @@ const ReviewList = () => {
 
 	return (
 		<>
-			<ul className="flex align-middle gap-8">
+			<ul className="flex flex-wrap lg:flex-nowrap align-middle gap-8">
 				{reviews.map((review) => (
-					<li className="flex-auto max-w-79.5" key={review.id}>
+					<li className="flex-auto w-79.5" key={review.id}>
 						<ReviewCard review={review} onclick={handleReviewModalOpen} />
 					</li>
 				))}

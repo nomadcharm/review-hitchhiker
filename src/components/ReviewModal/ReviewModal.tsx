@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import LikeDislikeButton from "../LikeDislikeButton/LikeDislikeButton";
 import moment from "moment";
 import { Controller, useForm } from "react-hook-form";
+import { useAuth } from "../../context/UserProvider";
 
 interface ReviewModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
 
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
+  const currentUser = useAuth();
 
   const handleLike = () => {
     if (review.isLike) return;
@@ -89,7 +91,8 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
         const newComment = {
           text: data.comment,
           date: new Date().toISOString(),
-          image: imageUrl
+          image: imageUrl,
+          user: currentUser.user,
         };
 
         const updatedReview = {
@@ -100,7 +103,7 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
         onUpdate(updatedReview);
         reset();
         setIsLoading(false);
-      }, 2000);
+      }, 1000);
     } catch (error: unknown) {
       console.log(error);
       setIsLoading(false);
@@ -109,11 +112,11 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center  w-full h-full bg-[var(--clr-periwinkle-o40)] overflow-y-scroll"
+      className="fixed inset-0 flex items-center justify-center w-full h-full bg-[var(--clr-periwinkle-o40)]"
       onClick={onClose}
     >
       <div
-        className="relative mt-14 mb-14 p-8 pt-6 w-[600px] min-h-[400px] rounded-2xl bg-white shadow-2xl"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 pt-6 max-w-[80%] md:w-[600px] max-h-screen min-h-[400px] rounded-2xl bg-white shadow-2xl overflow-y-auto custom-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         <IconButton className="!absolute !top-6 !right-6" onClick={onClose}>
@@ -124,7 +127,7 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
             {review.user?.username}
           </p>
           <div className="p-10 pb-2 border-b-4 border-[var(--clr-periwinkle)] rounded-2xl">
-            <p className="mb-4 text-lg">{review.text}</p>
+            <p className="mb-4 text-sm md:text-lg">{review.text}</p>
             <div className="flex items-center justify-between">
               <span className="italic text-xs">{moment(review.createDT).format("ll")}</span>
               <LikeDislikeButton
@@ -141,8 +144,8 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
           <h3 className="text-lg font-bold">Comments:</h3>
           <ul>
             {review.comments?.map((comment, index) => (
-              <li key={index} className="mt-2 p-2 border rounded">
-                <p>{comment.text}</p>
+              <li key={index} className="mt-2 p-2 border border-[var(--clr-periwinkle)] rounded">
+                <p className="mb-2">{comment.text}</p>
                 {comment.image && (
                   <img
                     src={
@@ -154,7 +157,8 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
                     className="mt-2 max-w-full h-auto rounded"
                   />
                 )}
-                <span className="text-xs italic">{moment(comment.date).format("ll")}</span>
+                <p className="text-xs">{comment.user.username}</p>
+                <p className="text-xs italic">{moment(comment.date).format("ll")}</p>
               </li>
             ))}
           </ul>
@@ -215,7 +219,7 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
           />
           {selectedImage && (
             <div className="mt-2">
-              <p className="text-sm">Selected Image:</p>
+              <p className="text-sm">Выбранное изображение:</p>
               <img
                 src={URL.createObjectURL(selectedImage)}
                 alt="Selected"
@@ -225,7 +229,7 @@ const ReviewModal: FC<ReviewModalProps> = ({ isOpen, review, onClose, onUpdate }
           )}
           <button
             type="submit"
-            className="self-end p-4 w-60 h-14 bg-[var(--clr-zircon)] hover:bg-[var(--clr-periwinkle)] text-center
+            className="self-center md:self-end p-4 w-60 h-14 bg-[var(--clr-zircon)] hover:bg-[var(--clr-periwinkle)] text-center
               transition-colors duration-300 cursor-pointer"
           >
             {isLoading ? (

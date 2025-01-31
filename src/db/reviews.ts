@@ -7,7 +7,7 @@ export const testReviews: CommentModelDataResult = {
 			id: "1",
 			createDT: "2025-01-20T12:00:00Z",
 			updateDT: "2025-01-20T12:00:00Z",
-			user: { username: "Username" },
+			user: { username: "Random" },
 			userGuid: "abcde-12345-fghij-67890",
 			text: "I refuse to answer that question on the grounds that I don't know the answer!",
 			isLike: null,
@@ -19,7 +19,7 @@ export const testReviews: CommentModelDataResult = {
 			id: "2",
 			createDT: "2025-01-27T10:00:00Z",
 			updateDT: "2025-01-27T10:00:00Z",
-			user: { username: "Username" },
+			user: { username: "Ford" },
 			userGuid: "abcde-12345-fghij-67890",
 			text: "I refuse to answer that question on the grounds that I don't know the answer!",
 			isLike: true,
@@ -31,7 +31,7 @@ export const testReviews: CommentModelDataResult = {
 			id: "3",
 			createDT: "2025-01-29T10:00:00Z",
 			updateDT: "2025-01-29T10:00:00Z",
-			user: { username: "Username" },
+			user: { username: "Douglas Adams" },
 			userGuid: "abcde-12345-fghij-67890",
 			text: `For instance, on the planet Earth, man had always assumed that 
 				he was more intelligent than dolphins because he had achieved so much—the wheel, 
@@ -45,7 +45,8 @@ export const testReviews: CommentModelDataResult = {
 				{
 					text: "Это комментарий",
 					image: null,
-					date: "2025-01-30T10:00:00Z"
+					date: "2025-01-30T10:00:00Z",
+					user: { username: "Random"}
 				}
 			]
 		},
@@ -53,7 +54,7 @@ export const testReviews: CommentModelDataResult = {
 			id: "4",
 			createDT: "2025-01-30T10:00:00Z",
 			updateDT: "2025-01-30T10:00:00Z",
-			user: { username: "Username" },
+			user: { username: "Marvin" },
 			userGuid: "abcde-12345-fghij-67890",
 			text: `For instance, on the planet Earth, man had always assumed that 
 				he was more intelligent than dolphins because he had achieved so much—the wheel, 

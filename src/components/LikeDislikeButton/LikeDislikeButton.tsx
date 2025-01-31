@@ -12,14 +12,14 @@ interface LikeDislikeProps {
 
 const LikeDislikeButton: FC<LikeDislikeProps> = ({ likes, dislikes, onLike, onDislike }) => {
 	return (
-		<div>
-			<IconButton onClick={onLike}>
+		<div className="flex items-center gap-5.5">
+			<IconButton className="!w-5 flex items-center gap-1" onClick={onLike}>
 				<ThumbUpIcon className="text-[var(--clr-caribbean-green)]" />
-				<span>{likes}</span>
+				<span className="text-xs">{likes}</span>
 			</IconButton>
-			<IconButton onClick={onDislike}>
+			<IconButton className="!w-5 flex items-center gap-1" onClick={onDislike}>
 				<ThumbDownIcon className="text-[var(--clr-persimmon)]" />
-				<span>{dislikes}</span>
+				<span className="text-xs">{dislikes}</span>
 			</IconButton>
 		</div>
 	);

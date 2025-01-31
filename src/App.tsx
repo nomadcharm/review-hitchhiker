@@ -1,11 +1,16 @@
+import Header from "./components/Header/Header";
 import { ReviewsProvider } from "./context/ReviewsProvider";
+import { UserProvider } from "./context/UserProvider";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 
 function App() {
 	return (
-		<ReviewsProvider>
-			<ReviewsPage />
-		</ReviewsProvider>
+		<UserProvider>
+			<ReviewsProvider>
+				<Header />
+				<ReviewsPage />
+			</ReviewsProvider>
+		</UserProvider>
 	);
 }
 

@@ -17,6 +17,7 @@ interface CommentModel {
 		text: string | null;
 		image?: string | File | null;
 		date: string;
+		user: UserModel;
 	}[];
 }
 
