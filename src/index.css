@@ -1,30 +1,107 @@
 @import "tailwindcss";
 
 :root {
-	--clr-white: hsl(0, 0&, 100%);
 	--clr-zircon: hsl(222, 100%, 96%);
-	--clr-periwinkle: hsl(241, 100%, 89%);
+	--clr-periwinkle: #c8c7ff;
 	--clr-pickled-bluewood: hsl(224, 30%, 27%);
 	--clr-caribbean-green: hsl(166, 100%, 37%);
 	--clr-persimmon: hsl(0, 100%, 67%);
+	--clr-cornflower-blue: hsla(256, 72%, 46%, 1);
 
-	/* - Light red: hsl(0, 100%, 67%)
-- Orangey yellow: hsl(39, 100%, 56%)
-- Green teal: hsl(166, 100%, 37%)
-- Cobalt blue: hsl(234, 85%, 45%)
+	/* with opacity */
+	--clr-periwinkle-o40: hsla(241, 100%, 89%, 0.4);
+}
 
-## Gradients
+@layer utilities {
+	.loader {
+		@apply w-[120px] h-[22px] rounded-[20px] relative border-2 text-[#514b82];
+	}
 
-- Light slate blue (background): hsl(252, 100%, 67%)
-- Light royal blue (background): hsl(241, 81%, 54%)
+	.loader::before {
+		content: "";
+		@apply absolute m-[2px] inset-y-0 left-0 rounded-2xl bg-current;
+		inset-inline-end: 100%;
+		animation: l6 2s infinite;
+	}
 
-- Violet blue (circle): hsla(256, 72%, 46%, 1)
-- Persian blue (circle): hsla(241, 72%, 46%, 0)
+	@keyframes l6 {
+		100% {
+			inset: 0;
+		}
+	}
 
-### Neutral
+	.custom-file-input::-webkit-file-upload-button {
+		visibility: hidden;
+	}
 
-- Light lavender: hsl(241, 100%, 89%)
-- Dark gray blue: hsl(224, 30%, 27%) */
+	.custom-file-input::before {
+		content: "Загрузить изображение";
+		display: inline-block;
+		background: #8685e3;
+		border-radius: 8px;
+		padding: 5px 8px;
+		outline: none;
+		white-space: nowrap;
+		user-select: none;
+		cursor: pointer;
+		text-shadow: 1px 1px var(--clr-pickled-bluewood);
+		font-weight: 500;
+		font-size: 14px;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	.custom-file-input:hover::before {
+		opacity: 0.8;
+	}
+
+	.custom-file-input:hover::before {
+		border-color: black;
+	}
+
+	.custom-file-input:active {
+		outline: 0;
+	}
+
+	.btn-custom-loader {
+		display: inline-block;
+		width: 28px;
+		aspect-ratio: 1;
+		border: 3px solid #ddd;
+		border-radius: 50%;
+		position: relative;
+		transform: rotate(45deg);
+	}
+
+	.btn-custom-loader::before {
+		content: "";
+		position: absolute;
+		inset: -3px;
+		border-radius: 50%;
+		border: 3px solid #514b82;
+		animation: l18 2s infinite linear;
+	}
+
+	@keyframes l18 {
+		0% {
+			clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+		}
+
+		25% {
+			clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+		}
+
+		50% {
+			clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+		}
+
+		75% {
+			clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+		}
+
+		100% {
+			clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+		}
+	}
 }
 
 body {

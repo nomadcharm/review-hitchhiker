@@ -1,25 +1,43 @@
-import { reviews } from "../../db/reviews";
-import { CommentModel } from "../../types/interface";
+import { useState } from "react";
 import ReviewCard from "../ReviewCard/ReviewCard";
+import ReviewModal from "../ReviewModal/ReviewModal";
+import { useReviews } from "../../context/ReviewsProvider";
 
 const ReviewList = () => {
-	const reviewList: CommentModel[] = reviews;
+	const { reviews, updateReview } = useReviews();
+	const [isModalOpen, setIsOpenModal] = useState<boolean>(false);
+	const [selectedReviewId, setSelectedReviewId] = useState<string>();
+
+	const handleReviewModalOpen = (id: string) => {
+		setSelectedReviewId(id);
+		setIsOpenModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsOpenModal(false);
+	};
+
+	const selectedReview = reviews.find((review) => review.id === selectedReviewId);
 
 	return (
-		<section className="py-10">
-			<div className="mx-auto p-6 w-full max-w-[1360px]">
-      <ul className="flex align-middle gap-8">
-				{reviewList.map((review) => (
-					<li
-            className="flex-auto max-w-79.5"
-            key={review.id}
-          >
-						<ReviewCard review={review} />
+		<>
+			<ul className="flex align-middle gap-8">
+				{reviews.map((review) => (
+					<li className="flex-auto max-w-79.5" key={review.id}>
+						<ReviewCard review={review} onclick={handleReviewModalOpen} />
 					</li>
 				))}
 			</ul>
-      </div>
-		</section>
+
+			{selectedReview && (
+				<ReviewModal
+					isOpen={isModalOpen}
+					review={selectedReview}
+					onClose={handleCloseModal}
+					onUpdate={updateReview}
+				/>
+			)}
+		</>
 	);
 };
 

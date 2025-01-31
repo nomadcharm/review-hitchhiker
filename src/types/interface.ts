@@ -11,6 +11,13 @@ interface CommentModel {
 	userGuid?: string;
 	text?: string | null;
 	isLike?: boolean | null;
+	likes: number;
+	dislikes: number;
+	comments?: {
+		text: string | null;
+		image?: string | File | null;
+		date: string;
+	}[];
 }
 
 interface UserModel {
