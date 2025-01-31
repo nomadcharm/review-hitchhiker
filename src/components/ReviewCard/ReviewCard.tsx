@@ -1,6 +1,5 @@
 import ForumIcon from "@mui/icons-material/Forum";
 import moment from "moment";
-import "moment/locale/ru";
 import { CommentModel } from "../../types/interface";
 
 interface ReviewCardProps {
@@ -9,7 +8,7 @@ interface ReviewCardProps {
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({ review, onclick }) => {
-	moment.locale("ru");
+	
 	return (
 		<div
 			className="relative p-8 pt-16 rounded-2xl bg-white cursor-pointer"

@@ -1,14 +1,19 @@
-import Header from "./components/Header/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReviewsProvider } from "./context/ReviewsProvider";
 import { UserProvider } from "./context/UserProvider";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
+import Header from "./components/Header/Header";
 
 function App() {
 	return (
 		<UserProvider>
 			<ReviewsProvider>
-				<Header />
-				<ReviewsPage />
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route path="/" element={<ReviewsPage />} />
+					</Routes>
+				</BrowserRouter>
 			</ReviewsProvider>
 		</UserProvider>
 	);
