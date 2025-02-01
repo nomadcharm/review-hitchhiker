@@ -8,7 +8,7 @@ function App() {
 	return (
 		<UserProvider>
 			<ReviewsProvider>
-				<BrowserRouter>
+				<BrowserRouter basename="/review-hitchhiker">
 					<Header />
 					<Routes>
 						<Route path="/" element={<ReviewsPage />} />
